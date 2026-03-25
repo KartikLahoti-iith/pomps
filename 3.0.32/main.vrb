@@ -1,0 +1,17 @@
+\frametitle{Python Code }
+\begin{lstlisting}
+x_step = [0, 1, 2, 3, 4]
+y_step = [0, cdf[0], cdf[1], cdf[2], cdf[2]]
+
+ax2.step(x_step, y_step, color='r')
+
+ax2.plot(X, cdf)
+
+ax2.set_title('Cumulative Distribution Function (CDF)', fontsize=14)
+ax2.set_xlabel('Random Variable X', fontsize=12)
+ax2.set_ylabel('Cumulative Probability P(X <= x)', fontsize=12)
+ax2.set_ylim(0, 1.1)
+ax2.grid()
+
+plt.show()
+\end{lstlisting}
