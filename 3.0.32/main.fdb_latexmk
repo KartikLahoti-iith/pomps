@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1774442478.34334 "/home/kartik-lahoti/Documents/POMS/pomps/3.0.32/main.tex" "main.pdf" "main" 1774442480.55895 0
+["pdflatex"] 1774520993.94999 "/home/kartik-lahoti/Documents/POMS/pomps/3.0.32/main.tex" "main.pdf" "main" 1774520996.88923 0
   "/etc/texmf/web2c/texmf.cnf" 1754414756.32258 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/kartik-lahoti/Documents/POMS/pomps/3.0.32/main.tex" 1774442476.18307 7140 080416ec15793cd90a4f2ada29ebe77d ""
+  "/home/kartik-lahoti/Documents/POMS/pomps/3.0.32/main.tex" 1774520993.67422 8578 113fa033e003b47dde9e1061f6ee7312 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss10.tfm" 1136768653 1316 b636689f1933f24d1294acdf6041daaa ""
@@ -344,12 +344,13 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1754414779.1369 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1754414886 8213451 b4eb6a66609468adca8e2290f64fe332 ""
   "figs/fig.png" 1774442035.05443 38147 b3c06cca6912e1879f210e84fff21508 ""
+  "figs/plt.png" 1774520801.99118 53179 71c3722927c1503a99ed4e218df86f28 ""
   "gvv.sty" 1774442272.2217 4396 6301ea006ea5005af6af83558ca51441 ""
-  "main.aux" 1774442480.38308 2017 bf3e18f1cce1e987e31b177ba915a8c0 "pdflatex"
-  "main.nav" 1774442480.38422 1295 ef040a83926d85743749b42a2275f515 "pdflatex"
-  "main.out" 1774442479.83767 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1774442476.18307 7140 080416ec15793cd90a4f2ada29ebe77d ""
-  "main.vrb" 1774442480.47534 414 3cee029aa7fba966525a8c34c8f984a7 "pdflatex"
+  "main.aux" 1774520996.69129 2404 245ab3075b0faeea0b8d2807249e1831 "pdflatex"
+  "main.nav" 1774520996.69328 1574 f5abf7444d939a8c2cd188b6df8c9c87 "pdflatex"
+  "main.out" 1774520995.51033 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1774520993.67422 8578 113fa033e003b47dde9e1061f6ee7312 ""
+  "main.vrb" 1774520996.52305 619 67c3ca9b9e8d72de91ca7c7f83bdf385 "pdflatex"
   (generated)
   "main.aux"
   "main.log"

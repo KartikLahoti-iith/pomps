@@ -1,17 +1,19 @@
 \frametitle{Python Code }
 \begin{lstlisting}
-x_step = [0, 1, 2, 3, 4]
-y_step = [0, cdf[0], cdf[1], cdf[2], cdf[2]]
+x_axis = np.linspace(0, 4, 100)
+gaussianCurve = norm.pdf(x_axis, mu, sigma)
 
-ax2.step(x_step, y_step, color='r')
+plt.plot(x_axis, gaussianCurve, 'r-', linewidth=2,
+         label=f'Gaussian Overlay\n($\mu$={mu:.2f}, $\sigma$={sigma:.2f})')
 
-ax2.plot(X, cdf)
+plt.axvline(1.87,color = "yellow",linewidth=1)
+plt.axvline(mu,color = "green",linewidth=1)
 
-ax2.set_title('Cumulative Distribution Function (CDF)', fontsize=14)
-ax2.set_xlabel('Random Variable X', fontsize=12)
-ax2.set_ylabel('Cumulative Probability P(X <= x)', fontsize=12)
-ax2.set_ylim(0, 1.1)
-ax2.grid()
-
+plt.title('Simulation of Discrete PMF vs Continuous Gaussian Overlay', fontsize=14)
+plt.xlabel('Random Variable X', fontsize=12)
+plt.ylabel('Probability Density', fontsize=12)
+plt.xticks(X)
+plt.legend()
+plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.show()
 \end{lstlisting}
