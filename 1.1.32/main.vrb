@@ -1,19 +1,15 @@
 \frametitle{Python Code }
 \begin{lstlisting}
-plt.figure()
+plt.axvline(x=-0.75, color='red', linestyle='--', label='Asymptote')
 
-plt.plot(x_exact, y_exact, label='Exact $G(j\omega)$', color='blue')
-plt.plot(x_asymp, y_asymp, label='Asymptote $x = -3/4$', color='red', linestyle='--')
+plt.xlim(-1, 0)
+plt.ylim(-10, 10)
 
-plt.title('Nyquist Plot Low-Frequency Asymptote ($\omega \\rightarrow 0^+$)')
-plt.xlabel('Real Part: $Re(G)$')
-plt.ylabel('Imaginary Part: $Im(G)$')
+plt.title("Nyquist Plot with Low-Frequency Asymptote")
+plt.xlabel("Real Axis")
+plt.ylabel("Imaginary Axis")
 plt.grid()
 plt.legend()
-plt.xlim(-1.5, 0.5)
-plt.ylim(-15, 0)
-
+plt.savefig('../figs/plt1.png')
 plt.show()
-plt.savefig("../fig/plt1.png")
-
     \end{lstlisting}

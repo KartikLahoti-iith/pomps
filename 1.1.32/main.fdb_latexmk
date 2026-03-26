@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1774441131.33915 "/home/kartik-lahoti/Documents/POMS/pomps/1.1.32/main.tex" "main.pdf" "main" 1774441133.26291 2
+["pdflatex"] 1774518596.31431 "/home/kartik-lahoti/Documents/POMS/pomps/1.1.32/main.tex" "main.pdf" "main" 1774518598.38913 2
   "/etc/texmf/web2c/texmf.cnf" 1754414756.32258 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/kartik-lahoti/Documents/POMS/pomps/1.1.32/main.tex" 1774440251.71881 6808 14d74c9c7a5c78b522d7a717a8be190f ""
+  "/home/kartik-lahoti/Documents/POMS/pomps/1.1.32/main.tex" 1774518596.00567 6613 932915c9acbe83963ad0a5725636d8f5 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss10.tfm" 1136768653 1316 b636689f1933f24d1294acdf6041daaa ""
@@ -378,14 +378,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1754414779.1369 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1754414886 8213451 b4eb6a66609468adca8e2290f64fe332 ""
-  "figs/fig1.png" 0 -1 0 ""
-  "figs/plt1.png" 0 -1 0 ""
+  "figs/fig1.png" 1774357431.95826 90450 83a0890d848c8eff03cb2edadbb281e1 ""
+  "figs/plt1.png" 1774517271.52516 51459 a781ced8d55807d6b74ac748183a6159 ""
   "gvv.sty" 1774352361.35169 4396 6301ea006ea5005af6af83558ca51441 ""
-  "main.aux" 1774441133.13235 2497 d33ac9debd56149d2418b4611194fae4 "pdflatex"
-  "main.nav" 1774441133.13345 1534 e7ee47a7cd664741e02c36dd9c375cbc "pdflatex"
-  "main.out" 1774441133.13275 83 65a763a6e0f28b718309d517f6484606 "pdflatex"
-  "main.tex" 1774440251.71881 6808 14d74c9c7a5c78b522d7a717a8be190f ""
-  "main.vrb" 1774441133.04088 490 9607e770d9e941106614598e2c16b34d "pdflatex"
+  "main.aux" 1774518598.2599 2497 d33ac9debd56149d2418b4611194fae4 "pdflatex"
+  "main.nav" 1774518598.26081 1534 e7ee47a7cd664741e02c36dd9c375cbc "pdflatex"
+  "main.out" 1774518598.26034 83 65a763a6e0f28b718309d517f6484606 "pdflatex"
+  "main.tex" 1774518596.00567 6613 932915c9acbe83963ad0a5725636d8f5 ""
+  "main.vrb" 1774518598.12765 346 2e68898a674bbf9ff3b618360fd25baf "pdflatex"
   (generated)
   "main.aux"
   "main.log"
