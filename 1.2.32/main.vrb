@@ -1,0 +1,9 @@
+\frametitle{Python Code }
+\begin{lstlisting}
+ax_time.set_yscale('log')
+ax_time.legend()
+
+plt.tight_layout()
+plt.savefig("../figs/plt2.png")
+plt.show()
+    \end{lstlisting}

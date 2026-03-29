@@ -1,0 +1,375 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\setbeamerfont{normal text}{size=\small}
+
+\usecolortheme{default}
+\usepackage{extarrows}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{xcolor}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+% --- FIXED LISTINGS CONFIGURATION ---
+\definecolor{backcolour}{gray}{0.95}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+
+\lstset{
+    language=Python,
+    backgroundcolor=\color{backcolour},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{codegreen},
+    numbers=left,
+    numberstyle=\tiny\color{codegray},
+    breaklines=true,
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{orange!70},
+    keepspaces=true
+}
+
+\title{1.2.32}
+\subtitle{Discrete-Time System}
+\author{Kartik Lahoti EE25BTECH11032}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Question}
+    \item Suppose that $x_n$ is sufficiently close to 3. Which of the following iterations $x_{n+1} = g(x_n)$ will converge to the fixed point $x = 3$?
+\hfill (MA 2007)
+\begin{multicols}{2}
+    \begin{enumerate}
+        \item $x_{n+1} = -16 + 6x_n + \dfrac{3}{x_n}$
+        \item $x_{n+1} = \sqrt{3 + 2x_n}$
+        \item $x_{n+1} = \dfrac{3}{x_n} - \dfrac{x_n}{2}$
+        \item $x_{n+1} = \dfrac{x_n^2 - 3}{2}$
+    \end{enumerate}
+    \end{multicols}
+\end{frame}
+
+\begin{frame}{The Core Definition}
+    If given a discrete-time signal $x[n]$ (a sequence of numbers where $n$ is an integer), its two-sided Z-transform is defined as:
+    $$X(z) = \sum_{n=-\infty}^{\infty} x[n] z^{-n}$$
+    
+    Here, $z$ is a complex variable. In polar form as $z = re^{j\omega}$, where $r$ is the magnitude and $\omega$ is the digital frequency.
+    
+    \vspace{0.3cm}
+    \textbf{Key Application:} Z-transforms are most commonly used to solve Difference Equations (the digital equivalent of differential equations).
+\end{frame}
+
+\begin{frame}{Defining the Error System}
+    If given an iteration equation:
+    $$x_{n+1} = g(x_n)$$
+    
+    To find the sequence that converges to the fixed point $x^* = 3$. Let's define the error $e_n$ as the small deviation from the fixed point at step $n$:
+    $$x_n = x^* + e_n$$
+    
+    Substitute this into the iteration equation to see how the error propagates:
+    $$x^* + e_{n+1} = g(x^* + e_n)$$
+\end{frame}
+
+\begin{frame}{Linearization via Taylor Series}
+    Because $g(x)$ is generally non-linear, we cannot apply the Z-transform directly (Z-transforms require Linear Time-Invariant systems). 
+    
+    \vspace{0.2cm}
+    To fix this, we linearize the right side using a first-order Taylor series expansion around the fixed point $x^*$:
+    $$g(x^* + e_n) \approx g(x^*) + e_n \cdot g'(x^*)$$
+    
+    Since $x^*$ is a fixed point, by definition $g(x^*) = x^*$. Substituting this back gives:
+    $$x^* + e_{n+1} = x^* + e_n \cdot g'(x^*)$$
+    $$e_{n+1} = g'(x^*) \cdot e_n$$
+\end{frame}
+
+\begin{frame}{The Difference Equation}
+    Now , a linear difference equation for the error. Let $K = g'(x^*)$.
+    $$e_{n+1} - K e_n = 0$$
+    
+    This is a first-order linear difference equation. It simply states that the error at the next step ($e_{n+1}$) is equal to a constant $K$ multiplied by the error at the current step ($e_n$).
+    `'
+    \vspace{0.3cm}
+    Now that we have a linear system, we can confidently apply the Z-transform to analyze its stability.
+\end{frame}
+
+\begin{frame}{The Time-Shifting Property}
+    The time-shifting property  for a delay, $x[n-k] \leftrightarrow z^{-k} X(z)$. But for an advance:
+    $$e_{n+1} \xrightarrow{\mathcal{Z}} zE(z) - ze_0$$
+    Here , $E(z)$ is the z-tranform of $e_n$ 
+    \vspace{0.05cm}
+    \textbf{Why the $- ze_0$?}
+    Because we use the Unilateral Z-transform (starting at $n=0$). Shifting a signal left pulls the value at $n=0$ into "negative time." To correct for this, we subtract out the initial condition $e_0$ (the error at the very beginning). 
+    
+    \vspace{0.2cm}
+    This property is exactly what allows the Z-transform to solve equations with initial conditions, much like the Laplace transform does for continuous circuits.
+\end{frame}
+
+\begin{frame}{The Algebra}
+    Substitute the transform back into our linearized error equation:
+    $$zE(z) - ze_0 - KE(z) = 0$$
+    
+    Factor out $E(z)$:
+    $$E(z)(z - K) = ze_0$$
+    
+    Divide to solve for $E(z)$, which is the Z-transform of our error signal:
+    $$E(z) = \frac{z e_0}{z - K}$$
+    
+    $$E(z) = e_0 \left( \frac{z}{z - K} \right)$$
+\end{frame}
+
+\begin{frame}{Inverse Z-Transform \& Stability}
+    Notice that $\frac{z}{z-K}$ is the exact standard transform pair that transforms back to $K^n u[n]$. Taking the Inverse Z-transform gives:
+    $$e_n = e_0 (K)^n$$
+    
+    \textbf{Why does this matter? (The Pole and Stability)}
+    In $E(z) = \frac{z e_0}{z - K}$, the denominator becomes zero when $z = K$. The system has a pole exactly at $K$.
+    
+    \begin{itemize}
+        \item \textbf{If $|K| < 1$:} The pole is inside the unit circle. As time ($n$) goes on, $(K)^n$ shrinks to zero. The error disappears, and the system converges (it is stable).
+        \item \textbf{If $|K| > 1$:} The pole is outside the unit circle. As time goes on, $(K)^n$ grows to infinity. The error blows up, and the system diverges (it is unstable).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Applying Theory to the Problem}
+    \textbf{Problem:} Which iteration $x_{n+1} = g(x_n)$ converges to the fixed point $x = 3$?
+    
+    Based on our Z-transform stability analysis of the linearized error, we must find the option where the pole $K = g'(3)$ lies inside the unit circle:
+    $$|g'(3)| < 1$$
+\end{frame}
+
+\begin{frame}{Evaluating the Options: (a) \& (b)}
+    \textbf{a)} $g(x) = -16 + 6x + \frac{3}{x}$
+    \begin{itemize}
+        \item Fixed point check: $g(3) = 3$ (Valid)
+        \item Derivative: $g'(x) = 6 - \frac{3}{x^2}$
+        \item Evaluate pole: $K = g'(3) = 6 - \frac{3}{9} \approx 5.67$
+        \item $|5.67| > 1 \implies$ \textbf{Diverges} (Pole outside unit circle)
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{b)} $g(x) = \sqrt{3 + 2x}$
+    \begin{itemize}
+        \item Fixed point check: $g(3) = 3$ (Valid)
+        \item Derivative: $g'(x) = \frac{1}{\sqrt{3 + 2x}}$
+        \item Evaluate pole: $K = g'(3) = \frac{1}{\sqrt{3 + 6}} = \frac{1}{3}$
+        \item $|\frac{1}{3}| < 1 \implies$ \textbf{Converges} (Pole inside unit circle)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Evaluating the Options: (c) \& (d)}
+    \textbf{c)} $g(x) = \frac{3}{x} - \frac{x}{2}$
+    \begin{itemize}
+        \item Fixed point check: $g(3) = \frac{3}{3} - \frac{3}{2} = -0.5$
+        \item Because $g(3) \neq 3$, the value $x=3$ isn't even a fixed point. \textbf{(Invalid)}
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{d)} $g(x) = \frac{x^2 - 3}{2}$
+    \begin{itemize}
+        \item Fixed point check: $g(3) = 3$ (Valid)
+        \item Derivative: $g'(x) = x$
+        \item Evaluate pole: $K = g'(3) = 3$
+        \item $|3| > 1 \implies$ \textbf{Diverges} (Pole outside unit circle)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+    \begin{center}
+        \Large By evaluating the system poles in the Z-domain, we clearly see that only \textbf{Option (b)} places the pole ($K = 1/3$) strictly inside the unit circle. 
+        
+        \vspace{0.5cm}
+        Therefore, only the iteration $x_{n+1} = \sqrt{3 + 2x_n}$ will successfully converge to the fixed point $x=3$.
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Python Code }
+    \begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+
+xStar = 3.0
+x0 = 3.1 
+iterations = 10
+def g_a(x): return -16 + 6*x + 3/x
+def g_b(x): return np.sqrt(3 + 2*x)
+def g_c(x): return 3/x - x/2
+def g_d(x): return (x**2 - 3)/2
+
+functions = {
+    'Option A': g_a,
+    'Option B': g_b,
+    'Option C': g_c,
+    'Option D': g_d
+}
+plt.figure()
+   \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Python Code }
+\begin{lstlisting}
+plt.axhline(y=xStar, color='k', linestyle='--', label='Fixed Point ($x^* = 3$)')
+for name, g in functions.items():
+    if name == 'Option C':
+        continue
+        
+    x_vals = [x0]
+    
+    try:
+        for _ in range(iterations):
+            next_x = g(x_vals[-1])
+            if abs(next_x) > 1000:
+                break
+            x_vals.append(next_x)
+            
+        plt.plot(range(len(x_vals)), x_vals, marker='o', label=name)
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Python Code }
+\begin{lstlisting}
+    except OverflowError:
+        pass 
+
+plt.title("Time-Domain Simulation of Iterative Error")
+plt.xlabel("Iteration Step ($n$)")
+plt.ylabel("Value ($x_n$)")
+plt.ylim(0, 10)
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Plot - 1}
+    \centering
+    \includegraphics[width=\columnwidth, height=0.8\textheight, keepaspectratio]{figs/plt1.png}   
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Python Code }
+    \begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+from scipy import signal
+
+# --- 1. Linearization (Theoretical K values) ---
+# Option A: g'(x) = 6 - 3/x^2  --> K = 17/3 (~5.667)
+# Option B: g'(x) = 1/sqrt(3+2x) --> K = 1/3  (~0.333)
+# Option D: g'(x) = x            --> K = 3.0
+# Custom M: g(x) = 9/x -> g'(x) = -9/x^2 --> K = -1.0
+
+options = {
+    'Option A (Unstable)': {'K': 17/3, 'color': 'red', 'marker': 'x'},
+    'Option B (Stable)':   {'K': 1/3,  'color': 'green', 'marker': 'o'},
+    'Option D (Unstable)': {'K': 3.0,  'color': 'orange', 'marker': 's'},
+    'Custom M (Marginal)': {'K': -1.0, 'color': 'blue', 'marker': 'd'}
+}
+   \end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Python Code }
+\begin{lstlisting}
+for name, data in options.items():
+    sys = signal.dlti([1, 0], [1, -data['K']])
+    data['system'] = sys
+    data['pole'] = sys.poles[0]
+
+fig = plt.figure(figsize=(15, 7))
+gs = GridSpec(1, 2, width_ratios=[1, 1.2], wspace=0.3)
+ax_z = fig.add_subplot(gs[0])
+ax_time = fig.add_subplot(gs[1])
+
+ax_z.set_title("Z-Domain Stability Map (System Poles)")
+ax_z.set_xlabel("$\mathcal{R}e\{z\}$")
+ax_z.set_ylabel("$\mathcal{I}m\{z\}$")
+ax_z.axis('equal')
+ax_z.set_xlim(-6.5, 6.5) 
+ax_z.set_ylim(-6.5, 6.5)
+ax_z.grid(True, linestyle=':', alpha=0.6)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Python Code }
+\begin{lstlisting}
+uc = plt.Circle((0, 0), 1, color='gray', fill=False, linestyle='--', linewidth=2)
+ax_z.add_artist(uc)
+theta_uc = np.linspace(0, 2*np.pi, 200)
+ax_z.fill(np.cos(theta_uc), np.sin(theta_uc), color='green', alpha=0.1, label='Stable ($|z|<1$)')
+
+ax_z.axhline(0, color='k', linewidth=1)
+ax_z.axvline(0, color='k', linewidth=1)
+
+for name, data in options.items():
+    p = data['pole']
+    ax_z.plot(np.real(p), np.imag(p), data['marker'], markersize=10, 
+              color=data['color'], markeredgecolor='k', 
+              label=f"{name}: Pole at {np.real(p):.2f}")
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Python Code }
+\begin{lstlisting}
+ax_z.legend(loc='upper right')
+
+ax_time.set_title("Time-Domain Error Response (Log Scale)")
+ax_time.set_xlabel("Iteration Step ($n$)")
+ax_time.set_ylabel("Error Magnitude Multiplier $|K|^n$")
+ax_time.grid(True, linestyle=':', alpha=0.6)
+
+num_steps = 10
+for name, data in options.items():
+    t, y = signal.dimpulse(data['system'], n=num_steps)
+    
+    response = np.abs(np.squeeze(y))
+    
+    ax_time.plot(t, response, marker=data['marker'], color=data['color'], 
+                 linestyle='-', linewidth=2, label=name)
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Python Code }
+\begin{lstlisting}
+ax_time.set_yscale('log')
+ax_time.legend()
+
+plt.tight_layout()
+plt.savefig("../figs/plt2.png")
+plt.show()
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Plot - 2}
+    \centering
+    \includegraphics[width=\columnwidth, height=0.8\textheight, keepaspectratio]{figs/plt2.png}   
+\end{frame}
+\end{document}
